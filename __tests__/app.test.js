@@ -2,7 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const { Movie } = require('../sql/setup.sql');
+const { movie } = require('../data/movie');
 
 describe('backend-express-template routes', () => {
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('backend-express-template routes', () => {
 
   it('/movie should return a list of movies', async () => {
     const res = await request(app).get('/movie');
-    const expected = Movie.map((film) => {
+    const expected = movie.map((film) => {
       return { id: film.id, name: film.name };
     });
     expect(res.body).toEqual(expected);
